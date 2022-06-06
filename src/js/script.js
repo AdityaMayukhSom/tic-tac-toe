@@ -5,13 +5,19 @@ const gamingBoxContainer = document.getElementById("gaming-box-container");
 const markingBox = document.getElementsByClassName("marking-box");
 const informationBox = document.getElementById("information-box");
 const soundButton = document.getElementById("sound-button");
+const playerOneScoreBox = document.getElementById("playerOneScoreBox");
+const playerTwoScoreBox = document.getElementById("playerTwoScoreBox");
 let isTie = false;
 let isSound = true;
 let arr = ["", "", "", "", "", "", "", "", ""];
 let currTurn = "player1";
 let isGameActive = true;
-informationBox.innerText = "Player 1's Turn";
 document.getElementById("copyright").innerHTML = `Copyright &copy; ${new Date().getFullYear()}`;
+let playerOneScore = 0;
+let playerTwoScore = 0;
+informationBox.innerText = "Player 1's Turn";
+playerOneScoreBox.innerHTML = playerOneScore;
+playerTwoScoreBox.innerHTML = playerTwoScore;
 
 const player1 = {
     move: '<img src="./assets/images/tick.svg" alt="" />',
@@ -37,6 +43,7 @@ soundButton.addEventListener("click", () => {
 
 const reset = document.getElementById("reset");
 reset.addEventListener("click", (e) => {
+    isTie = false;
     e.preventDefault();
     for (let index = 0; index < markingBox.length; index++) {
         const element = markingBox[index];
@@ -120,8 +127,12 @@ function declareWin() {
     }
     if (currTurn === "player1") {
         informationBox.innerText = "🎊 Player 1 Won 🎊";
+        playerOneScore += 1;
+        playerOneScoreBox.innerHTML = playerOneScore;
     } else {
         informationBox.innerText = "🎊 Player 2 Won 🎊";
+        playerTwoScore += 1;
+        playerTwoScoreBox.innerHTML = playerTwoScore;
     }
     isGameActive = false;
     reset.innerText = "Play Again";

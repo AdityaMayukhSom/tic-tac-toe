@@ -54,8 +54,13 @@ soundButton.addEventListener("click", () => {
 
 const reset = document.getElementById("reset");
 reset.addEventListener("click", (e) => {
-    isTie = false;
     e.preventDefault();
+    tie.pause();
+    tie.currentTime = 0;
+    victory.pause();
+    victory.currentTime = 0;
+
+    isTie = false;
     for (let index = 0; index < markingBox.length; index++) {
         const element = markingBox[index];
         element.innerHTML = "";

@@ -1,15 +1,16 @@
-// const turn = new Audio("./assets/sound/Ting.mp3");
+const turn = new Audio("./assets/sound/Turn.mp3");
 const victory = new Audio("./assets/sound/Victory.mp3");
+const tie = new Audio("./assets/sound/Tie.mp3");
 const gamingBoxContainer = document.getElementById("gaming-box-container");
 const markingBox = document.getElementsByClassName("marking-box");
 const informationBox = document.getElementById("information-box");
 const soundButton = document.getElementById("sound-button");
 const playerOneScoreBox = document.getElementById("playerOneScoreBox");
 const playerTwoScoreBox = document.getElementById("playerTwoScoreBox");
-const tickMove = `<img src="./assets/images/tick.svg" />`;
-const crossMove = `<img src="./assets/images/cross.svg" />`;
-const tickHelpingImage = `<img src="./assets/images/tick.svg" class="h-7 w-7 ml-3 mt-1"/>`;
-const crossHelpingImage = `<img src="./assets/images/cross.svg" class="h-7 w-7 ml-3 mt-1" />`;
+const tickMove = `<img src="./assets/images/tick.svg" alt="tick"/>`;
+const crossMove = `<img src="./assets/images/cross.svg" alt="cross"/>`;
+const tickHelpingImage = `<img src="./assets/images/tick.svg" class="h-7 w-7 ml-3 mt-1" alt="tick"/>`;
+const crossHelpingImage = `<img src="./assets/images/cross.svg" class="h-7 w-7 ml-3 mt-1" alt="cross"/>`;
 let isTie = false;
 let isSound = true;
 let arr = ["", "", "", "", "", "", "", "", ""];
@@ -118,11 +119,17 @@ gamingBoxContainer.addEventListener("click", (e) => {
                     isTie = true;
                 }
                 if (!isTie) {
+                    if (isSound) {
+                        turn.play();
+                    }
                     //Changing the playing player
                     currPlayer = currPlayer === player1 ? player2 : player1;
                     //As the turn has already changed, so if currPlayer is player1, we say it's player 1's turn.
                     informationBox.innerHTML = currPlayer === player1 ? `${player1.name}'s Turn ${player1.helpImage}` : `${player2.name}'s Turn ${player2.helpImage}`;
                 } else {
+                    if (isSound) {
+                        tie.play();
+                    }
                     declareTie();
                 }
             }
